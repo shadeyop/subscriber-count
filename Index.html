@@ -3,8 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -12,21 +15,51 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* PREMIUM ANIMATED BOX */
 .box {
   width: 230px;
   height: 92px;
-  padding: 1.5px;
+  padding: 2px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #a52b32, #333, #8c2028);
-  box-shadow: 0 4px 14px rgba(0,0,0,.3);
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: 0 3px 14px rgba(180, 25, 35, 0.22);
 }
 
+/* ROTATING BORDER */
+.box::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  z-index: -1;
+  background: conic-gradient(
+    from 0deg,
+    #64151b,
+    #d83b43,
+    #252525,
+    #ff7777,
+    #64151b
+  );
+  animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* INNER PANEL */
 .inner {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  background: linear-gradient(145deg,#151515,#080808);
+  background: linear-gradient(
+    145deg,
+    #171717,
+    #080808
+  );
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +69,8 @@ body {
   overflow: hidden;
 }
 
-.inner:after {
+/* SUBTLE RED ACCENT */
+.inner::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -47,23 +81,34 @@ body {
   border-radius: 5px;
 }
 
+/* HEADING */
 .heading {
-  color: #d94a50;
+  color: #df555b;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 3px;
 }
 
+/* SUBSCRIBER COUNT */
 .count {
-  color: white;
+  color: #ffffff;
   font-size: 35px;
   font-weight: 900;
   min-height: 39px;
-  text-shadow: 0 2px 8px rgba(255,255,255,.15);
-  animation: pulse 2.5s ease-in-out infinite;
+  text-shadow: 0 2px 8px rgba(255,255,255,.18);
+  animation: countPulse 2.5s ease-in-out infinite;
 }
 
-/* Custom dragon illustration */
+@keyframes countPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+/* CUSTOM DRAGON */
 .dragon {
   position: absolute;
   width: 48px;
@@ -71,8 +116,9 @@ body {
   top: -10px;
   right: -7px;
   z-index: 5;
-  animation: dragonFloat 3s ease-in-out infinite;
+  transform-origin: center;
   filter: drop-shadow(0 2px 4px rgba(180,20,30,.5));
+  animation: dragonFloat 3s ease-in-out infinite;
 }
 
 .dragon svg {
@@ -81,81 +127,104 @@ body {
 }
 
 @keyframes dragonFloat {
-  0%,100% { transform: translateY(0) rotate(-3deg); }
-  50% { transform: translateY(-4px) rotate(4deg); }
-}
-
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.025); }
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(4deg);
+  }
 }
 </style>
 </head>
 
 <body>
+
 <div class="box">
+
   <div class="inner">
 
     <div class="heading">SUBSCRIBE</div>
+
     <div class="count" id="count"></div>
 
+    <!-- CUSTOM DRAGON ILLUSTRATION -->
     <div class="dragon">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 100 100"
+           xmlns="http://www.w3.org/2000/svg">
+
         <defs>
-          <linearGradient id="dragonRed" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="dragonRed"
+            x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#ff7777"/>
             <stop offset="50%" stop-color="#bd252d"/>
             <stop offset="100%" stop-color="#590b13"/>
           </linearGradient>
         </defs>
 
-        <!-- Wings -->
+        <!-- WINGS -->
         <path d="M49 48 Q27 4 5 12 L19 32 L4 29
           Q17 49 42 62 Z"
-          fill="url(#dragonRed)" stroke="#e45b61" stroke-width="2"/>
+          fill="url(#dragonRed)"
+          stroke="#e45b61" stroke-width="2"/>
 
         <path d="M53 48 Q70 4 95 12 L82 32 L97 29
           Q83 49 59 62 Z"
-          fill="url(#dragonRed)" stroke="#e45b61" stroke-width="2"/>
+          fill="url(#dragonRed)"
+          stroke="#e45b61" stroke-width="2"/>
 
-        <!-- Wing details -->
+        <!-- WING DETAILS -->
         <path d="M49 48 L19 32 M49 48 L5 12
           M53 48 L82 32 M53 48 L95 12"
-          fill="none" stroke="#5c1119" stroke-width="2"/>
+          fill="none"
+          stroke="#5c1119"
+          stroke-width="2"/>
 
-        <!-- Body -->
+        <!-- BODY -->
         <path d="M34 53 Q48 38 68 49
           Q83 60 65 72 Q49 82 36 68
           Q24 59 34 53Z"
-          fill="url(#dragonRed)" stroke="#ed6268" stroke-width="2"/>
+          fill="url(#dragonRed)"
+          stroke="#ed6268"
+          stroke-width="2"/>
 
-        <!-- Neck and head -->
+        <!-- NECK AND HEAD -->
         <path d="M53 54 Q61 36 72 30
           Q84 23 91 34 L84 41
           Q77 45 70 41 L62 61Z"
-          fill="url(#dragonRed)" stroke="#ed6268" stroke-width="2"/>
+          fill="url(#dragonRed)"
+          stroke="#ed6268"
+          stroke-width="2"/>
 
-        <!-- Horns -->
+        <!-- HORNS -->
         <path d="M76 29 L70 14 L83 26
           M86 31 L96 20 L93 36"
-          fill="#d63a43" stroke="#ff7777" stroke-width="2"/>
+          fill="#d63a43"
+          stroke="#ff7777"
+          stroke-width="2"/>
 
-        <!-- Tail -->
+        <!-- TAIL -->
         <path d="M38 65 Q22 82 10 74
           Q20 94 43 74"
-          fill="none" stroke="#c82d37" stroke-width="6"
+          fill="none"
+          stroke="#c82d37"
+          stroke-width="6"
           stroke-linecap="round"/>
 
-        <!-- Eye -->
-        <circle cx="83" cy="34" r="2.5" fill="#ffd6a0"/>
+        <!-- EYE -->
+        <circle cx="83" cy="34" r="2.5"
+          fill="#ffd6a0"/>
 
-        <!-- Chest detail -->
+        <!-- CHEST -->
         <path d="M49 59 L56 66 L49 70"
-          fill="none" stroke="#ff9999" stroke-width="2"/>
+          fill="none"
+          stroke="#ff9999"
+          stroke-width="2"/>
+
       </svg>
     </div>
 
   </div>
 </div>
+
 </body>
 </html>
