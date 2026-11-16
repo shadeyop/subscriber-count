@@ -15,7 +15,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* PREMIUM ANIMATED BOX */
+/* MAIN BOX */
 .box {
   width: 230px;
   height: 92px;
@@ -24,29 +24,33 @@ body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  box-shadow: 0 3px 14px rgba(180, 25, 35, 0.22);
+  box-shadow: 0 3px 14px rgba(180,25,35,.22);
 }
 
-/* ROTATING BORDER */
+/* MULTI-COLOR ANIMATED BORDER */
 .box::before {
   content: "";
   position: absolute;
   inset: -100%;
   z-index: -1;
+
   background: conic-gradient(
-    from 0deg,
-    #64151b,
-    #d83b43,
-    #252525,
+    #ff0000,
     #ff7777,
-    #64151b
+    #7b00ff,
+    #00c8ff,
+    #00ff99,
+    #ffcc00,
+    #ff0000
   );
-  animation: borderRotate 4s linear infinite;
+
+  animation: borderRotate 5s linear infinite;
 }
 
 @keyframes borderRotate {
   to {
     transform: rotate(360deg);
+    filter: hue-rotate(360deg);
   }
 }
 
@@ -55,21 +59,19 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  background: linear-gradient(
-    145deg,
-    #171717,
-    #080808
-  );
+  background: linear-gradient(145deg,#171717,#080808);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 3px;
+
   position: relative;
   overflow: hidden;
 }
 
-/* SUBTLE RED ACCENT */
+/* SUBTLE ACCENT */
 .inner::after {
   content: "";
   position: absolute;
@@ -96,13 +98,15 @@ body {
   font-weight: 900;
   min-height: 39px;
   text-shadow: 0 2px 8px rgba(255,255,255,.18);
+
   animation: countPulse 2.5s ease-in-out infinite;
 }
 
 @keyframes countPulse {
-  0%, 100% {
+  0%,100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.035);
   }
@@ -116,8 +120,9 @@ body {
   top: -10px;
   right: -7px;
   z-index: 5;
-  transform-origin: center;
+
   filter: drop-shadow(0 2px 4px rgba(180,20,30,.5));
+
   animation: dragonFloat 3s ease-in-out infinite;
 }
 
@@ -127,9 +132,10 @@ body {
 }
 
 @keyframes dragonFloat {
-  0%, 100% {
+  0%,100% {
     transform: translateY(0) rotate(-3deg);
   }
+
   50% {
     transform: translateY(-4px) rotate(4deg);
   }
@@ -147,7 +153,7 @@ body {
 
     <div class="count" id="count"></div>
 
-    <!-- CUSTOM DRAGON ILLUSTRATION -->
+    <!-- CUSTOM DRAGON -->
     <div class="dragon">
       <svg viewBox="0 0 100 100"
            xmlns="http://www.w3.org/2000/svg">
@@ -155,9 +161,11 @@ body {
         <defs>
           <linearGradient id="dragonRed"
             x1="0" y1="0" x2="1" y2="1">
+
             <stop offset="0%" stop-color="#ff7777"/>
             <stop offset="50%" stop-color="#bd252d"/>
             <stop offset="100%" stop-color="#590b13"/>
+
           </linearGradient>
         </defs>
 
@@ -165,12 +173,14 @@ body {
         <path d="M49 48 Q27 4 5 12 L19 32 L4 29
           Q17 49 42 62 Z"
           fill="url(#dragonRed)"
-          stroke="#e45b61" stroke-width="2"/>
+          stroke="#e45b61"
+          stroke-width="2"/>
 
         <path d="M53 48 Q70 4 95 12 L82 32 L97 29
           Q83 49 59 62 Z"
           fill="url(#dragonRed)"
-          stroke="#e45b61" stroke-width="2"/>
+          stroke="#e45b61"
+          stroke-width="2"/>
 
         <!-- WING DETAILS -->
         <path d="M49 48 L19 32 M49 48 L5 12
